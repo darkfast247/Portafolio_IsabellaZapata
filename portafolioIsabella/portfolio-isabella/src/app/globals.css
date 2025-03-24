@@ -1,0 +1,211 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './animations.css';
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --primary: #4a90e2;
+  --primary-rgb: 74, 144, 226;
+  --secondary: #f5f5f5;
+  --accent: #e2774a;
+  --text-primary: #2d3748;
+  --text-secondary: #4a5568;
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0;
+  --swiper-theme-color: var(--primary);
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --header-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] {
+  --background: #1a1a1a;
+  --foreground: #ffffff;
+  --primary: #60a5fa;
+  --primary-rgb: 96, 165, 250;
+  --secondary: #2d3748;
+  --accent: #f97316;
+  --text-primary: #f7fafc;
+  --text-secondary: #a0aec0;
+  --card-bg: #2d3748;
+  --card-border: #4a5568;
+  --swiper-theme-color: var(--primary);
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --header-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+@layer base {
+  body {
+    color: var(--foreground);
+    background-color: var(--background);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: white;
+  }
+}
+
+@layer components {
+  .header {
+    @apply fixed top-0 w-full z-50;
+    background-color: var(--card-bg);
+    backdrop-filter: blur(8px);
+    box-shadow: var(--header-shadow);
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 0.75rem;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border-color: var(--primary);
+  }
+
+  .section {
+    @apply py-16 relative;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .section.bg-secondary {
+    background-color: var(--secondary);
+  }
+
+  .section-title {
+    @apply text-2xl font-bold mb-8 text-center relative;
+    color: var(--text-primary);
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background-color: var(--primary);
+    border-radius: 2px;
+  }
+
+  .button {
+    @apply px-6 py-2 rounded-lg font-medium transition-all duration-300;
+    background-color: var(--primary);
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .button:hover {
+    filter: brightness(110%);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Inputs y Formularios */
+  .input {
+    @apply w-full px-4 py-2 rounded-lg border transition-all duration-300;
+    background-color: var(--card-bg);
+    border-color: var(--card-border);
+    color: var(--text-primary);
+  }
+
+  .input:focus {
+    @apply outline-none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+  }
+
+  .input::placeholder {
+    color: var(--text-secondary);
+  }
+
+  /* Tags y Badges */
+  .tag {
+    @apply px-3 py-1 rounded-full text-sm inline-flex items-center;
+    background-color: rgba(var(--primary-rgb), 0.1);
+    color: var(--primary);
+  }
+
+  /* Iconos y elementos decorativos */
+  .icon-container {
+    @apply w-12 h-12 flex items-center justify-center rounded-full;
+    background-color: rgba(var(--primary-rgb), 0.1);
+    color: var(--primary);
+  }
+}
+
+/* Estilos del Swiper */
+.swiper {
+  width: 100%;
+  height: 100%;
+  padding: 2rem 0;
+}
+
+.swiper-slide {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--primary) !important;
+  background-color: var(--card-bg);
+  padding: 2rem;
+  border-radius: 50%;
+  box-shadow: var(--card-shadow);
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: var(--primary);
+  color: white !important;
+}
+
+.swiper-pagination-bullet {
+  background: var(--text-secondary);
+  opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--primary) !important;
+  opacity: 1;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Aspect Ratio */
+.aspect-w-16 {
+  position: relative;
+  padding-bottom: 56.25%;
+}
+
+.aspect-w-16 > * {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 0.75rem 0.75rem 0 0;
+  object-fit: cover;
+}
